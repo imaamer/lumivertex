@@ -8,7 +8,7 @@ export default function Home() {
           LumiVertex
         </h1>
         <p className="mt-4 text-muted-foreground">
-          A minimal starting point. Edit this page to build your site.
+          Converging Ideas into Action
         </p>
 
         <div className="mt-12 flex flex-wrap gap-3">
