@@ -16,7 +16,7 @@ export function Header() {
           href="/"
           className="text-lg font-semibold tracking-tight text-foreground"
         >
-          LumiVertex
+          Lumivertex
         </Link>
         <nav className="flex items-center gap-1" aria-label="Main">
           {navLinks.map(({ label, href }) => (

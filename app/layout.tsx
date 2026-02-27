@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "LumiVertex | AI Technology, Marketing Strategy & Lead Generation",
-  description: "LumiVertex converges AI technology, data-driven marketing strategy, and intelligent lead generation to architect measurable business growth. Free strategic consultation.",
+  title: "Lumivertex | AI Technology, Marketing Strategy & Lead Generation",
+  description: "Lumivertex converges AI technology, data-driven marketing strategy, and intelligent lead generation to architect measurable business growth. Free strategic consultation.",
 };
 
 export default function RootLayout({

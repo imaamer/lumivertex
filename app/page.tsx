@@ -2,9 +2,9 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 export const metadata = {
-  title: "LumiVertex | AI Technology, Marketing Strategy & Lead Generation",
+  title: "Lumivertex | AI Technology, Marketing Strategy & Lead Generation",
   description:
-    "LumiVertex converges AI technology, data-driven marketing strategy, and intelligent lead generation to architect measurable business growth. Free strategic consultation.",
+    "Lumivertex converges AI technology, data-driven marketing strategy, and intelligent lead generation to architect measurable business growth. Free strategic consultation.",
 };
 
 const VALUE_PILLARS = [
@@ -70,7 +70,7 @@ export default function Home() {
           Most businesses don&apos;t need more tools. They need clearer thinking.
         </h1>
         <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-          LumiVertex builds the architecture between where you are and where your
+          Lumivertex builds the architecture between where you are and where your
           data says you should be. AI-enabled technology. Strategy with proof.
           Growth you can measure before you invest.
         </p>
@@ -103,10 +103,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* The LumiVertex Paradigm */}
+      {/* The Lumivertex Paradigm */}
       <section className="mx-auto max-w-3xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-          The LumiVertex Paradigm
+          The Lumivertex Paradigm
         </h2>
         <p className="mt-6 text-muted-foreground leading-relaxed">
           Here is what makes us unusual: we give you the strategy first.

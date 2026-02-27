@@ -9,7 +9,7 @@ export function Footer() {
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <Link href="/" className="text-lg font-semibold text-foreground">
-              LumiVertex
+              Lumivertex
             </Link>
             <p className="mt-2 text-sm text-muted-foreground">
               Converging ideas into action. Building solutions that scale.
@@ -48,7 +48,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-10 border-t border-border pt-8 text-center text-sm text-muted-foreground">
-          <p>© {currentYear} LumiVertex. All rights reserved.</p>
+          <p>© {currentYear} Lumivertex. All rights reserved.</p>
         </div>
       </div>
     </footer>
