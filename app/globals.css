@@ -126,3 +126,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes logo-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-25%);
+  }
+}

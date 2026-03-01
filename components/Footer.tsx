@@ -19,10 +19,10 @@ const socialIcons = [
 const Footer = () => {
   return (
     <footer className="border-t border-border bg-background py-16 flex flex-row items-center justify-center">
-      <div className="container flex flex-col items-center justify-center mx-auto max-w-6xl">
-        <div className="grid gap-10 md:grid-cols-4">
+      <div className="container flex flex-col items-center justify-center mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-10 md:grid-cols-4 w-full">
           {/* Brand column - dark teal block matching design */}
-          <div className="flex flex-col items-center justify-center rounded-2xl bg-primary p-8 text-center">
+          <div className="flex flex-col items-center justify-center rounded-2xl bg-primary p-6 sm:p-8 text-center w-full">
             <Link href="/" className="mb-4 block w-full max-w-[200px]">
               <Image
                 src="/icons/lumivertex-logo-white.svg"
