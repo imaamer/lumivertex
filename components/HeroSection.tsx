@@ -22,10 +22,13 @@ const HeroSection = () => {
   return (
     <section className="relative max-w-8xl mx-auto overflow-hidden bg-background pb-16 pt-12">
       <div className="container mx-auto max-w-8xl flex flex-col items-center px-4 text-center sm:px-6 lg:px-8">
-        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-4 py-1.5 text-xs font-medium text-muted-foreground">
+        <Link
+          href="/about"
+          className="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-4 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary hover:bg-primary/5 hover:text-primary"
+        >
           <Shield className="h-3.5 w-3.5 text-primary" />
           ABOUT LUMIVERTEX
-        </div>
+        </Link>
 
         <h1 className="mb-4 max-w-4xl text-center font-sans leading-tight tracking-tight text-foreground">
           <span className="block text-3xl font-normal md:text-4xl">
