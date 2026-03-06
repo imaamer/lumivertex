@@ -1,106 +1,88 @@
-import { Check, Search, Target, MessageSquare, Code } from "lucide-react";
+"use client";
 
-const differentiators = [
-  {
-    title: "Unbiased Audit",
-    description: "Deep dive into current tech stack and workflows.",
-  },
-  {
-    title: "Iterative Delivery",
-    description: "High-velocity development cycles with weekly sprints.",
-  },
-];
-
-const steps = [
-  {
-    step: "01",
-    icon: Search,
-    title: "Blueprint",
-    description: "We dive deep into understanding your business, users, and market landscape.",
-  },
-  {
-    step: "02",
-    icon: Target,
-    title: "Architect",
-    description: "Clear strategy and requirements definition to align on goals and scope.",
-  },
-  {
-    step: "03",
-    icon: MessageSquare,
-    title: "Converge",
-    description: "Creating beautiful, user-centered designs that solve real problems.",
-  },
-  {
-    step: "04",
-    icon: Code,
-    title: "Scale",
-    description:
-      "Development is conducted using modern technologies and aligned with best practices, prioritizing long-term scalability.",
-    wide: true,
-  },
-];
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 const LumiVertexParadigm = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) setInView(true);
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="bg-background py-20">
-      <div className="container mx-auto max-w-8xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* Left column: heading, paragraph, differentiators */}
-          <div className="flex flex-col gap-8">
-            <div>
-              <h2 className="mb-4 font-heading text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+    <section
+      ref={sectionRef}
+      className={`lumi-vertex-paradigm bg-background py-20 ${inView ? "lumi-vertex-paradigm-in-view" : ""}`}
+    >
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-12 lg:grid-cols-[40%_60%] lg:gap-16 lg:items-start">
+          {/* Left: title + paragraphs + CTA */}
+          <div className="flex flex-col gap-6">
+            <div className="paradigm-heading flex flex-col gap-6">
+              <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground md:text-4xl">
                 The LumiVertex Paradigm
               </h2>
-              <p className="text-base leading-relaxed text-muted-foreground md:text-lg">
-                Innovation isn&apos;t a straight line. It&apos;s a continuous loop of diagnosis,
-                execution, and optimization. We partner with firms ready to dismantle outdated
-                systems and replace them with agile, scalable technology.
+              <div className="flex flex-col gap-4 text-base leading-relaxed text-muted-foreground md:text-lg">
+                <p>
+                  Here is what makes us unusual: we give you the strategy first. Complete. With
+                  numbers, logic, and a clear implementation roadmap. You can execute it yourself.
+                  You can bring it to anyone. Or you can ask us to build it.
+                </p>
+                <p>
+                  It is a statement about how we believe business relationships should begin; with
+                  trust, not dependency.
+                </p>
+              </div>
+              <p className="border-l-4 border-primary bg-primary/5 py-4 pl-5 pr-4 text-lg font-semibold italic leading-snug text-foreground md:text-xl">
+                We would rather you choose us freely than need us blindly.
               </p>
             </div>
-            <div className="flex flex-col gap-4">
-              {differentiators.map((item) => (
-                <div
-                  key={item.title}
-                  className="flex gap-4 rounded-xl border border-border bg-secondary p-5"
-                >
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/15">
-                    <Check className="h-5 w-5 text-primary" strokeWidth={2.5} />
-                  </div>
-                  <div>
-                    <h3 className="font-heading text-lg font-semibold text-foreground">
-                      {item.title}
-                    </h3>
-                    <p className="mt-1 text-sm text-muted-foreground">{item.description}</p>
-                  </div>
-                </div>
-              ))}
+            <div className="paradigm-cta-wrapper">
+              <Link
+                href="/contact"
+                className="group relative flex h-14 w-[320px] items-center overflow-hidden rounded-full border-2 border-primary bg-transparent py-4 px-6 text-base font-semibold text-primary no-underline shadow-none outline-none [transition:all_0.3s_ease-out] hover:bg-primary hover:text-primary-foreground hover:shadow-[0_8px_30px_rgba(35,124,103,0.25)]"
+              >
+                <span className="paradigm-cta-arrow absolute left-6 top-1/2 z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary [transition:background-color_0.3s,color_0.3s] group-hover:bg-primary-foreground group-hover:text-primary">
+                  <ArrowRight
+                    className="h-5 w-5 [transition:transform_0.3s_ease-out] group-hover:translate-x-1 sm:h-6 sm:w-6"
+                    strokeWidth={2.5}
+                    aria-hidden
+                  />
+                </span>
+                <span className="absolute inset-y-0 left-6 right-20 flex items-center justify-start">
+                  <span className="paradigm-cta-text overflow-hidden whitespace-nowrap text-left">
+                    Get Your Strategy
+                  </span>
+                </span>
+              </Link>
             </div>
           </div>
 
-          {/* Right column: four-step process cards */}
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {steps.map((step) => (
-              <div
-                key={step.step}
-                className={`flex flex-col rounded-xl border border-border bg-secondary p-5 transition-shadow hover:shadow-md ${
-                  step.wide ? "sm:col-span-2 lg:col-span-3" : ""
-                }`}
-              >
-                <div className="mb-3 flex items-baseline gap-2">
-                  <span className="flex-1 text-xs font-medium text-muted-foreground">
-                    → Step {step.step}
-                  </span>
-                  {/* <span className="text-xs font-light tracking-tight text-muted-foreground/80">
-                    {step.step}
-                  </span> */}
-                </div>
-                <step.icon className="mb-3 h-4 w-4 text-primary" />
-                <h3 className="font-heading text-lg font-semibold text-foreground">{step.title}</h3>
-                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                  {step.description}
-                </p>
-              </div>
-            ))}
+          {/* Right: large image */}
+          <div className="paradigm-image relative aspect-5/3 w-full overflow-hidden rounded-2xl lg:aspect-5/4 lg:min-h-[336px]">
+            <div className="absolute inset-0 animate-[float-on-water_6s_ease-in-out_infinite]">
+              <Image
+                src="/images/hero-1.jpg"
+                alt="The LumiVertex Paradigm"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                priority={false}
+              />
+            </div>
           </div>
         </div>
       </div>

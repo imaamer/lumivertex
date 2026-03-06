@@ -1,3 +1,8 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { AnimatedCounter } from "@/components/AnimatedCounter";
+
 const outcomes = [
   {
     metric: "312%",
@@ -20,37 +25,69 @@ const outcomes = [
 ];
 
 const MeasuredOutcomesSection = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) setInView(true);
+      },
+      { threshold: 0.2, rootMargin: "0px 0px -40px 0px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="py-16 md:py-20">
+    <section
+      ref={sectionRef}
+      className={`measured-outcomes-section py-16 md:py-20 ${inView ? "measured-outcomes-in-view" : ""}`}
+    >
       <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <h2 className="mb-12 text-center font-heading text-2xl font-medium tracking-tight text-foreground md:text-6xl">
+        <h2 className="measured-outcomes-title mb-12 text-center font-heading text-2xl font-medium tracking-tight text-foreground md:text-5xl">
           Measured Outcomes
         </h2>
         <div className="grid gap-10 sm:grid-cols-3 sm:gap-8">
-          {outcomes.map((item) => (
-            <div key={item.metric} className="flex flex-col gap-4 rounded-lg p-4">
-              <span className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-                {item.metric}
-              </span>
-              <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
-                {item.description}
-              </p>
+          {outcomes.map((item, i) => (
+            <div
+              key={item.metric}
+              className="measured-outcomes-card flex flex-col gap-4 rounded-lg p-4"
+            >
+              <AnimatedCounter
+                value={item.metric}
+                label={item.description}
+                delay={i * 150}
+                trigger={inView}
+                className="[&>p:first-child]:text-3xl [&>p:first-child]:font-bold [&>p:first-child]:tracking-tight [&>p:first-child]:md:text-4xl [&>p:last-child]:leading-relaxed [&>p:last-child]:md:text-base"
+              />
               <div className="mt-2 flex h-8 items-end gap-1.5">
-                {item.bars.map((_, i) => {
-                  const isFilled = item.progressive ? i === item.bars.length - 1 : true;
-                  const flexRatio = item.progressive ? i + 1 : 1;
-                  const heightPercent = item.progressive ? ((i + 1) / item.bars.length) * 100 : 100;
+                {item.bars.map((_, barIndex) => {
+                  const isFilled = item.progressive ? barIndex === item.bars.length - 1 : true;
+                  const flexRatio = item.progressive ? barIndex + 1 : 1;
+                  const heightPercent = item.progressive
+                    ? ((barIndex + 1) / item.bars.length) * 100
+                    : 100;
+                  const targetHeight = item.metric === "0%" ? 25 : heightPercent;
+                  const barDelay = inView ? i * 100 + barIndex * 80 : 0;
                   return (
                     <div
-                      key={i}
-                      className="min-w-[8px] rounded-md"
-                      style={{
-                        flex: flexRatio,
-                        height: item.metric === "0%" ? "25%" : `${heightPercent}%`,
-                        backgroundColor: isFilled ? "var(--primary)" : "var(--muted-foreground)",
-                        opacity: isFilled ? 1 : 0.35,
-                      }}
-                    />
+                      key={barIndex}
+                      className="flex h-full min-w-[8px] flex-col justify-end rounded-md"
+                      style={{ flex: flexRatio }}
+                    >
+                      <div
+                        className="w-full rounded-md transition-[height] duration-700 ease-out"
+                        style={{
+                          height: inView ? `${targetHeight}%` : "0%",
+                          backgroundColor: isFilled ? "var(--primary)" : "var(--muted-foreground)",
+                          opacity: isFilled ? 1 : 0.35,
+                          transitionDelay: `${barDelay}ms`,
+                        }}
+                      />
+                    </div>
                   );
                 })}
               </div>

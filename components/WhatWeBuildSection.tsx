@@ -1,126 +1,161 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import {
-  Search,
-  LayoutTemplate,
-  Settings,
-  Braces,
-  Shield,
-  Database,
-  Cloud,
-  Smartphone,
+  Sparkles,
   BarChart3,
+  Target,
+  FileText,
+  TrendingUp,
+  ArrowRight,
   type LucideIcon,
 } from "lucide-react";
 
-const items: {
-  step: string;
+const services: {
   icon: LucideIcon;
   title: string;
   description: string;
 }[] = [
   {
-    step: "01",
-    icon: Search,
-    title: "API Ecosystems",
-    description: "We dive deep into understanding your business, users, and market landscape.",
-  },
-  {
-    step: "02",
-    icon: LayoutTemplate,
-    title: "Web Apps",
-    description: "Clear strategy and requirements definition to align on goals and scope.",
-  },
-  {
-    step: "03",
-    icon: Settings,
-    title: "ML Modeling",
-    description: "Creating beautiful, user-centered designs that solve real problems.",
-  },
-  {
-    step: "04",
-    icon: Braces,
-    title: "Generative AI Integration",
+    icon: Sparkles,
+    title: "AI Strategy & Implementation",
     description:
-      "Development is conducted using modern technologies and aligned with best practices, prioritizing long-term scalability.",
+      "Custom AI systems engineered to integrate with your existing workflows. From GPT integrations to full ML pipelines—technology built for your specific context.",
   },
   {
-    step: "05",
-    icon: Shield,
-    title: "Zero-Trust Systems",
-    description:
-      "A smooth launch is achieved by strictly adhering to a process that incorporates thorough testing and quality assurance checks.",
-  },
-  {
-    step: "06",
-    icon: Database,
-    title: "Data Warehousing",
-    description: "Creating beautiful, user-centered designs that solve real problems.",
-  },
-  {
-    step: "07",
-    icon: Cloud,
-    title: "Cloud Architecture",
-    description: "Creating beautiful, user-centered designs that solve real problems.",
-  },
-  {
-    step: "08",
-    icon: Smartphone,
-    title: "Mobile",
-    description: "Creating beautiful, user-centered designs that solve real problems.",
-  },
-  {
-    step: "09",
     icon: BarChart3,
-    title: "BI Dashboards",
-    description: "Creating beautiful, user-centered designs that solve real problems.",
+    title: "Marketing Strategy",
+    description:
+      "Data-validated marketing architecture: every channel, every campaign backed by numbers and a rationale you can interrogate before spending a cent.",
   },
-];
-
-// Per-row column templates: varied widths so each row has different card sizes (wide / medium / narrow)
-const rowTemplateClasses = [
-  "sm:[grid-template-columns:2fr_1.4fr_1fr]", // row 1: wide, medium, narrow
-  "sm:[grid-template-columns:1.2fr_2fr_1fr]", // row 2: medium, wide, narrow
-  "sm:[grid-template-columns:1fr_1.3fr_2fr]", // row 3: narrow, medium, wide
+  {
+    icon: Target,
+    title: "Intelligent Lead Generation",
+    description:
+      "Precision pipelines that don't just fill the top of the funnel—they qualify intent, filter noise, and deliver conversations worth having.",
+  },
+  {
+    icon: FileText,
+    title: "Content & SEO Architecture",
+    description:
+      "Strategic content built to rank, convert, and compound. Not content for content's sake—content that sits inside a larger growth architecture.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Paid Media & Performance",
+    description:
+      "Media buying as a science. Every dollar tracked, every creative tested, every audience mapped to a conversion hypothesis.",
+  },
 ];
 
 const WhatWeBuildSection = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) setInView(true);
+      },
+      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="py-16 md:py-20 bg-muted">
+    <section
+      ref={sectionRef}
+      className={`what-we-build-section py-16 md:py-20 bg-muted ${inView ? "what-we-build-in-view" : ""}`}
+    >
       <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <h2 className="mb-4 font-heading text-2xl font-medium tracking-tight text-foreground md:text-5xl">
-          What We Build
-        </h2>
-        <p className="mb-12 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+        <div className="what-we-build-header text-left">
+          <p className="text-sm font-semibold uppercase tracking-widest text-accent">Services</p>
+          <h2 className="mt-4 font-heading text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl md:text-[2.75rem]">
+            What We Build
+          </h2>
+        </div>
+        <p className="what-we-build-intro mb-12 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
           Eleven disciplines. One integrated intelligence. We don&apos;t silo our thinking because
           your growth doesn&apos;t happen in silos.
         </p>
 
-        <div className="flex flex-col gap-6">
-          {[0, 1, 2].map((rowIndex) => (
+        {/* Small screens: simple card grid, no lines or animation */}
+        <div className="what-we-build-simple grid grid-cols-1 gap-4 sm:grid-cols-2 lg:hidden">
+          {services.map((service) => (
             <div
-              key={rowIndex}
-              className={`grid grid-cols-1 gap-4 sm:gap-5 ${rowTemplateClasses[rowIndex]}`}
+              key={service.title}
+              className="what-we-build-simple-card group cursor-pointer rounded-3xl bg-white p-6 shadow-lg transition-shadow hover:shadow-xl"
             >
-              {items.slice(rowIndex * 3, rowIndex * 3 + 3).map((item) => (
-                <div
-                  key={item.step}
-                  className="flex flex-col rounded-xl border border-border bg-card p-5 shadow-sm transition-shadow hover:shadow-md"
-                >
-                  <div className="mb-3 flex items-start justify-between gap-2">
-                    <span className="text-xs font-medium text-muted-foreground">
-                      → Step {item.step}
-                    </span>
-                  </div>
-                  <item.icon className="mb-3 h-5 w-5 text-primary" strokeWidth={1.5} />
-                  <h3 className="font-heading text-lg font-semibold text-foreground">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {item.description}
-                  </p>
-                </div>
-              ))}
+              <div className="what-we-build-icon-wrap flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
+                <service.icon className="h-6 w-6" strokeWidth={2} aria-hidden />
+              </div>
+              <h3 className="mt-4 font-heading text-lg font-semibold text-foreground sm:text-xl">
+                {service.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground line-clamp-4">
+                {service.description}
+              </p>
             </div>
           ))}
+        </div>
+
+        {/* Large screens: animated line + connectors + floating clouds */}
+        <div className="what-we-build-clouds hidden lg:block">
+          <div
+            className="what-we-build-top-line h-0.5 w-full shrink-0 rounded-full bg-white/80"
+            aria-hidden
+          />
+          <div className="mt-0 flex w-full flex-nowrap items-stretch gap-0 overflow-visible pb-2">
+            {services.map((service, i) => (
+              <div
+                key={service.title}
+                className="what-we-build-card -ml-24 flex min-w-[300px] flex-1 cursor-pointer flex-col items-center first:ml-0 xl:-ml-28 xl:min-w-[320px]"
+              >
+                <div
+                  className="what-we-build-connector w-px shrink-0 bg-white/80"
+                  style={{ height: (i % 2 === 0 ? 50 : 350) + "px" }}
+                  aria-hidden
+                />
+                <div className="what-we-build-cloud-offset w-full flex flex-1 flex-col">
+                  <div className="what-we-build-cloud-float relative h-[260px] w-full flex flex-col">
+                    <div className="what-we-build-cloud-body group relative flex h-[260px] flex-col p-6">
+                      <div className="flex flex-1 flex-col gap-4 min-h-0">
+                        <div className="what-we-build-icon-wrap flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
+                          <service.icon className="h-6 w-6" strokeWidth={2} aria-hidden />
+                        </div>
+                        <div className="min-w-0 flex-1 min-h-0">
+                          <h3 className="font-heading text-lg font-semibold text-foreground transition-colors duration-300 group-hover:text-foreground sm:text-xl line-clamp-2">
+                            {service.title}
+                          </h3>
+                          <p className="mt-2 text-sm leading-relaxed text-muted-foreground transition-colors duration-300 group-hover:text-foreground/80 line-clamp-4 overflow-hidden text-ellipsis">
+                            {service.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="what-we-build-cta mt-10 flex justify-center">
+          <Link
+            href="/services"
+            className="group inline-flex items-center gap-2 rounded-full border-2 border-primary bg-transparent px-6 py-3 text-base font-semibold text-primary no-underline transition-colors duration-300 hover:bg-primary hover:text-primary-foreground"
+          >
+            Learn more
+            <ArrowRight
+              className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
+              strokeWidth={2.5}
+              aria-hidden
+            />
+          </Link>
         </div>
       </div>
     </section>
