@@ -56,7 +56,7 @@ const StrategicResources = () => {
   return (
     <section
       ref={sectionRef}
-      className={`strategic-resources-section py-16 md:py-20 bg-background ${inView ? "strategic-resources-in-view" : ""}`}
+      className={`strategic-resources-section py-16 md:py-20 bg-muted ${inView ? "strategic-resources-in-view" : ""}`}
     >
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-start">
@@ -98,15 +98,14 @@ const StrategicResources = () => {
                 className="strategic-resources-card group flex items-center gap-4 rounded-xl border border-border bg-muted p-4 transition-all duration-500 ease-out hover:scale-[1.02] hover:bg-secondary md:p-5"
               >
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border-2 border-primary bg-muted text-primary transition-colors duration-300 group-hover:bg-[#48e5c2] group-hover:border-[#48e5c2]">
-                  <resource.icon className="h-5 w-5 transition-colors duration-300 group-hover:text-foreground" strokeWidth={2} />
+                  <resource.icon
+                    className="h-5 w-5 transition-colors duration-300 group-hover:text-foreground"
+                    strokeWidth={2}
+                  />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <h3 className="font-heading font-semibold text-foreground">
-                    {resource.title}
-                  </h3>
-                  <p className="mt-0.5 text-sm text-muted-foreground">
-                    {resource.metadata}
-                  </p>
+                  <h3 className="font-heading font-semibold text-foreground">{resource.title}</h3>
+                  <p className="mt-0.5 text-sm text-muted-foreground">{resource.metadata}</p>
                 </div>
                 <ArrowRight
                   className="h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-300 group-hover:translate-x-0.5 group-hover:text-foreground"

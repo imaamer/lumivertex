@@ -1,7 +1,7 @@
 import { ArrowRight, Shield, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { AnimatedCounter } from "@/components/AnimatedCounter";
+import { AnimatedCounter } from "./AnimatedCounter";
 
 const stats = [
   { value: "10M+", label: "Project valuation" },

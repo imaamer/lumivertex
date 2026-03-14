@@ -49,7 +49,7 @@ const BlogSection = () => {
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                  className={`cursor-pointer rounded-full px-4 py-2 text-sm font-medium transition-colors ${
                     activeCategory === cat
                       ? "bg-[#48e5c2] text-foreground border border-[#48e5c2] shadow-sm"
                       : "text-muted-foreground hover:text-foreground"
@@ -77,7 +77,7 @@ const BlogSection = () => {
           {posts.map((post) => (
             <article
               key={post.title}
-              className="group overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md"
+              className="group overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg hover:border-primary/30"
             >
               <div className="relative aspect-16/10 w-full overflow-hidden rounded-t-xl">
                 <Image
@@ -95,15 +95,18 @@ const BlogSection = () => {
                   </span>
                   <span className="text-muted-foreground">{post.date}</span>
                 </div>
-                <h3 className="font-heading text-lg font-semibold leading-snug text-foreground">
+                <h3 className="font-heading text-lg font-semibold leading-snug text-foreground transition-colors duration-200 group-hover:text-primary">
                   {post.title}
                 </h3>
                 <a
                   href={post.href}
-                  className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-foreground transition-colors hover:text-primary"
+                  className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-foreground transition-colors duration-200 hover:text-primary"
                 >
                   Read More
-                  <ArrowRight className="h-4 w-4" strokeWidth={2} />
+                  <ArrowRight
+                    className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
+                    strokeWidth={2}
+                  />
                 </a>
               </div>
             </article>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { AnimatedCounter } from "@/components/AnimatedCounter";
+import { AnimatedCounter } from "@/components/landing-page-components/AnimatedCounter";
 
 const outcomes = [
   {

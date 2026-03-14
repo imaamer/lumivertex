@@ -29,7 +29,7 @@ const features = [
 
 const FeaturesSection = () => {
   return (
-    <section className="features-section bg-background py-20 overflow-hidden">
+    <section className="features-section bg-muted py-20 overflow-hidden">
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-left">
           <p className="text-sm font-semibold uppercase tracking-widest text-primary animate-in fade-in slide-in-from-bottom-4 duration-600 fill-mode-both">
@@ -73,3 +73,4 @@ const FeaturesSection = () => {
 };
 
 export default FeaturesSection;
+

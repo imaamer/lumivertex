@@ -50,7 +50,7 @@
 :root {
   --radius: 0.625rem;
   /* Designer palette: #f6f7eb cream, #333333 charcoal, #237c67 teal, #48e5c2 turquoise */
-  --background: #f6f7eb;
+  --background: #ffffff;
   --foreground: #333333;
   --card: #f6f7eb;
   --card-foreground: #333333;
@@ -167,6 +167,15 @@
   }
 }
 
+@keyframes cta-arrow-move-sm {
+  from {
+    transform: translateY(-50%) translateX(0);
+  }
+  to {
+    transform: translateY(-50%) translateX(170px);
+  }
+}
+
 @keyframes cta-text-reveal {
   from {
     clip-path: inset(0 100% 0 0);
@@ -174,6 +183,21 @@
   }
   to {
     clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+
+@keyframes seesaw-in {
+  0% {
+    transform: rotate(-6deg);
+    opacity: 0.5;
+  }
+  50% {
+    transform: rotate(5deg);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(0deg);
     opacity: 1;
   }
 }
@@ -220,9 +244,15 @@
   animation: process-arrow-flow 2.5s linear infinite;
   will-change: left;
 }
-.process-arrow-delay-0 { animation-delay: 0s; }
-.process-arrow-delay-1 { animation-delay: 0.85s; }
-.process-arrow-delay-2 { animation-delay: 1.7s; }
+.process-arrow-delay-0 {
+  animation-delay: 0s;
+}
+.process-arrow-delay-1 {
+  animation-delay: 0.85s;
+}
+.process-arrow-delay-2 {
+  animation-delay: 1.7s;
+}
 
 /* Feature section - whole card zooms; wrapper has entrance animation so Tailwind doesn't override */
 section.features-section .features-section-card-wrapper {
@@ -366,22 +396,26 @@ section.strategic-resources-section.strategic-resources-in-view .strategic-resou
   transform: translateY(0);
   transition-delay: 240ms;
 }
-section.strategic-resources-section.strategic-resources-in-view .strategic-resources-card:nth-child(1) {
+section.strategic-resources-section.strategic-resources-in-view
+  .strategic-resources-card:nth-child(1) {
   opacity: 1 !important;
   transform: translateY(0);
   transition-delay: 100ms;
 }
-section.strategic-resources-section.strategic-resources-in-view .strategic-resources-card:nth-child(2) {
+section.strategic-resources-section.strategic-resources-in-view
+  .strategic-resources-card:nth-child(2) {
   opacity: 1 !important;
   transform: translateY(0);
   transition-delay: 180ms;
 }
-section.strategic-resources-section.strategic-resources-in-view .strategic-resources-card:nth-child(3) {
+section.strategic-resources-section.strategic-resources-in-view
+  .strategic-resources-card:nth-child(3) {
   opacity: 1 !important;
   transform: translateY(0);
   transition-delay: 260ms;
 }
-section.strategic-resources-section.strategic-resources-in-view .strategic-resources-card:nth-child(4) {
+section.strategic-resources-section.strategic-resources-in-view
+  .strategic-resources-card:nth-child(4) {
   opacity: 1 !important;
   transform: translateY(0);
   transition-delay: 340ms;
