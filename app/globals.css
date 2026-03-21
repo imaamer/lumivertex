@@ -176,6 +176,46 @@
   }
 }
 
+/* CTA arrow move tuned for wider pill widths (e.g. 420px) */
+@keyframes cta-arrow-move-wide {
+  from {
+    transform: translateY(-50%) translateX(0);
+  }
+  to {
+    transform: translateY(-50%) translateX(332px);
+  }
+}
+
+/* Content Marketing CTA (400px pill): stop slightly before right edge */
+@keyframes cta-arrow-move-content-wide {
+  from {
+    transform: translateY(-50%) translateX(0);
+  }
+  to {
+    transform: translateY(-50%) translateX(280px);
+  }
+}
+
+/* Reputation hero CTA (~390×66px): arrow sweeps left → right; 292px = 390 - 24 - 24 - 50 */
+@keyframes cta-arrow-reputation-hero {
+  from {
+    transform: translateY(-50%) translateX(0);
+  }
+  to {
+    transform: translateY(-50%) translateX(292px);
+  }
+}
+
+/* Wide CTA pill (~420px): explicit class so animation always applies (Tailwind arbitrary animate-[...] can omit custom @keyframes) */
+@layer utilities {
+  .cta-arrow-animate-wide {
+    animation: cta-arrow-move-content-wide 1.2s ease-out 0.4s forwards;
+  }
+  .cta-arrow-animate-reputation-hero {
+    animation: cta-arrow-reputation-hero 1.2s ease-out 0.4s forwards;
+  }
+}
+
 @keyframes cta-text-reveal {
   from {
     clip-path: inset(0 100% 0 0);

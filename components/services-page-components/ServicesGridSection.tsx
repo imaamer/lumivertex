@@ -1,88 +1,101 @@
 "use client";
 
 import Link from "next/link";
-import { Sparkles, BarChart3, Target, FileText, TrendingUp, ArrowRight } from "lucide-react";
+import {
+  ArrowRight,
+  BarChart3,
+  BookOpen,
+  Layout,
+  Mail,
+  Megaphone,
+  Palette,
+  Search,
+  Share2,
+  Shield,
+  Sparkles,
+  UserPlus,
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const services = [
   {
     icon: BarChart3,
     title: "Analytics & Business Intelligence",
-    summary: "Data that actually informs decisions.",
+    href: "/services/business-intelligence",
     description:
       "We design the analytical infrastructure that transforms information into clear, confident decisions—without dashboard overwhelm.",
   },
   {
     icon: Sparkles,
     title: "AI & Custom Technology Development",
-    summary: "Bespoke intelligence, engineered for your specific reality.",
+    href: "/services/ai",
     description:
-      "We build the systems that don't exist yet because your ambition requires them—custom platforms, internal tools, and decision-support systems.",
+      "Bespoke intelligence, engineered for your specific reality. We build the systems that don’t exist yet because your ambition requires them.",
     emphasized: false,
   },
   {
-    icon: BarChart3,
+    icon: Megaphone,
     title: "PPC & Paid Advertising",
-    summary: "Precision-targeted investment, every cent traced to a decision.",
+    href: "/services/ppc",
     description:
-      "From search to social and programmatic, every campaign is calibrated to your unit economics and tested against clear hypotheses.",
+      "Precision-targeted investment. Every cent tracked to a decision, every campaign calibrated to your economics.",
   },
   {
-    icon: Target,
+    icon: Search,
     title: "Search Engine Optimization",
-    summary: "Visibility engineered with intent, not just rankings.",
+    href: "/services/seo",
     description:
-      "We architect search strategies that compound over time, aligning technical SEO, content, and authority with how your buyers actually search.",
+      "Visibility engineered with intent. We don’t chase algorithms, we build the relevance that algorithms reward.",
   },
   {
-    icon: Target,
+    icon: UserPlus,
     title: "Lead Generation",
-    summary: "Qualified conversations, not just more contacts.",
+    href: "/services/lead-generation",
     description:
       "Precision-engineered pipelines that deliver qualified opportunities, not noise. Architecture for revenue, not vanity volume.",
   },
   {
-    icon: FileText,
+    icon: Layout,
     title: "Web & UX Design",
-    summary: "Interfaces that think.",
+    href: "/services/ui-ux",
     description:
-      "Every layout, interaction, and pixel is engineered for clarity, conversion, and the experience your audience deserves.",
+      "Interfaces that think. Every layout, interaction, and pixel engineered for clarity, conversion, and the experience your audience deserves.",
   },
   {
-    icon: TrendingUp,
+    icon: Share2,
     title: "Social Media Marketing",
-    summary: "Presence with substance.",
+    href: "/services/social-media-marketing",
     description:
-      "We build social architectures that earn and hold attention, instead of chasing trends that vanish in weeks.",
+      "Presence with substance. We build social architectures that earn attention because they deserve it.",
   },
   {
-    icon: FileText,
+    icon: BookOpen,
     title: "Content Marketing",
-    summary: "Words that carry weight.",
+    href: "/services/content-marketing",
     description:
-      "Strategy-driven content that educates, positions, and converts—without ever sounding like it's trying too hard.",
+      "Words that carry weight. Strategy-driven content that educates, positions, and converts without ever sounding like it’s trying.",
   },
   {
-    icon: TrendingUp,
+    icon: Mail,
     title: "Email Marketing & Automation",
-    summary: "The most personal channel, treated with precision.",
+    href: "/services/email-marketing",
     description:
-      "Automated intelligence with human resonance: sequences, lifecycle programs, and campaigns that respect your audience's attention.",
+      "The most personal channel, treated with the precision it demands. Automated intelligence. Human resonance.",
   },
   {
-    icon: BarChart3,
+    icon: Palette,
     title: "Brand Strategy & Identity",
-    summary: "Clarity that compounds.",
+    href: "/services/branding",
     description:
-      "Positioning, narrative, and visual systems that make your brand unmistakable and your decisions easier.",
+      "Before you can market anything, the world must understand what you mean. We architect that understanding.",
   },
   // Shown again in row 5 next to CTA (per design)
   {
-    icon: BarChart3,
-    title: "Analytics & Business Intelligence",
-    summary: "Data that actually informs decisions.",
+    icon: Shield,
+    title: "Reputation & PR Management",
+    href: "/services/reputation",
     description:
-      "We design the analytical infrastructure that transforms information into clear, confident decisions—without dashboard overwhelm.",
+      "Trust is built in public. We ensure the narrative surrounding your brand reflects the reality within it.",
   },
 ];
 
@@ -106,16 +119,18 @@ function ServiceCard({
   delayMs: number;
 }) {
   const d = directionClasses[direction];
+  const href = "href" in service && service.href ? service.href : "#services-grid";
   return (
-    <article
-      className={`group flex h-full min-w-0 rounded-2xl border border-border bg-background p-2 text-left shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-700 ease-out hover:shadow-[0_14px_44px_rgba(0,0,0,0.1)] ${
+    <Link
+      href={href}
+      className={`group flex h-full min-w-0 rounded-2xl border border-border bg-background p-2 text-left shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-700 ease-out hover:shadow-[0_14px_44px_rgba(0,0,0,0.1)] no-underline outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
         inView ? d.visible : d.initial
       }`}
       style={{ transitionDelay: `${delayMs}ms` }}
     >
       {/* Inner card: gap between outer and this border; inner border highlights on hover */}
       <div
-        className={` cursor-pointer flex h-full min-h-0 flex-col gap-4 rounded-lg border-2 border-border/80 p-6 transition-colors duration-200 group-hover:border-primary group-hover:bg-primary/10 ${
+        className={`flex h-full min-h-0 flex-col gap-4 rounded-lg border-2 border-border/80 p-6 transition-colors duration-200 group-hover:border-primary group-hover:bg-primary/10 ${
           service.emphasized ? "bg-primary/5 border-primary/30" : ""
         }`}
       >
@@ -133,16 +148,13 @@ function ServiceCard({
           <p className="mt-3 text-sm text-muted-foreground transition-colors duration-200 group-hover:text-foreground/80">
             {service.description}
           </p>
-          <Link
-            href="#services-grid"
-            className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-muted-foreground underline underline-offset-2 transition-colors duration-200 group-hover:text-primary"
-          >
+          <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-muted-foreground transition-colors group-hover:text-primary">
             Read more
             <ArrowRight className="h-4 w-4" strokeWidth={2} aria-hidden />
-          </Link>
+          </span>
         </div>
       </div>
-    </article>
+    </Link>
   );
 }
 

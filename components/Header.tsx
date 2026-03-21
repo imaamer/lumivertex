@@ -29,6 +29,64 @@ const aboutMenuItems: { title: string; href: string; description: string }[] = [
   },
 ];
 
+const servicesMenuItems: { title: string; href: string; description: string }[] = [
+  {
+    title: "SEO Services",
+    href: "/services/seo",
+    description: "Build relevance, authority, and search growth.",
+  },
+  {
+    title: "PPC / Paid Ads Services",
+    href: "/services/ppc",
+    description: "Engineer paid campaigns with measurable outcomes.",
+  },
+  {
+    title: "Social Media Marketing",
+    href: "/services/social-media-marketing",
+    description: "Build intelligent presence across platforms.",
+  },
+  {
+    title: "Content Marketing",
+    href: "/services/content-marketing",
+    description: "Strategy-driven content that builds authority and converts.",
+  },
+  {
+    title: "Web & UX Design",
+    href: "/services/ui-ux",
+    description: "Interfaces engineered for clarity, conversion, and experience.",
+  },
+  {
+    title: "Email Marketing & Automation",
+    href: "/services/email-marketing",
+    description: "Intelligent nurture systems and CRM-aligned automation.",
+  },
+  {
+    title: "AI & Custom Technology Development",
+    href: "/services/ai",
+    description: "Custom AI, intelligent automation, and systems built for your reality.",
+  },
+  {
+    title: "Analytics & Business Intelligence",
+    href: "/services/business-intelligence",
+    description: "Dashboards, attribution, and BI that turn data into decisions.",
+  },
+  {
+    title: "Brand Strategy & Identity",
+    href: "/services/branding",
+    description: "Positioning, visual identity, and messaging that define what you mean.",
+  },
+  {
+    title: "Reputation & PR Management",
+    href: "/services/reputation",
+    description: "Online reputation, digital PR, and reviews that protect trust.",
+  },
+  {
+    title: "Lead Generation",
+    href: "/services/lead-generation",
+    description: "Inbound, outbound, and ABM systems that deliver qualified pipeline.",
+  },
+];
+
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -105,18 +163,41 @@ export function Header() {
               </NavigationMenuContent>
             </NavigationMenuItem>
 
-            <NavigationMenuItem>
-              <NavigationMenuLink
-                asChild
-                className={cn(
-                  navigationMenuTriggerStyle(),
-                  "hover:bg-[#EAEFE9]! hover:text-foreground!"
-                )}
-              >
-                <Link href="/services" className="text-sm font-medium text-foreground">
-                  Services
-                </Link>
-              </NavigationMenuLink>
+            {/* Services dropdown */}
+            <NavigationMenuItem className="hidden md:block">
+              <NavigationMenuTrigger className="text-sm font-medium text-foreground hover:bg-[#EAEFE9]! hover:text-foreground! data-[state=open]:bg-[#EAEFE9]! data-[state=open]:text-foreground! data-[state=open]:hover:bg-[#EAEFE9]!">
+                Services
+              </NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid w-[320px] gap-2 p-2">
+                  <li>
+                    <NavigationMenuLink asChild>
+                      <Link
+                        href="/services"
+                        className="block select-none rounded-lg p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                      >
+                        <div className="font-medium text-foreground">All Services</div>
+                        <div className="text-sm text-muted-foreground">
+                          Explore our full integrated services suite.
+                        </div>
+                      </Link>
+                    </NavigationMenuLink>
+                  </li>
+                  {servicesMenuItems.map((item) => (
+                    <li key={item.href}>
+                      <NavigationMenuLink asChild>
+                        <Link
+                          href={item.href}
+                          className="block select-none rounded-lg p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div className="font-medium text-foreground">{item.title}</div>
+                          <div className="text-sm text-muted-foreground">{item.description}</div>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                  ))}
+                </ul>
+              </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuLink
@@ -243,6 +324,19 @@ export function Header() {
               >
                 Services
               </Link>
+              <ul className="mt-1 mb-2 space-y-1 pl-6">
+                {servicesMenuItems.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="block rounded-lg px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </li>
             <li>
               <Link

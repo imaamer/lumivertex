@@ -16,36 +16,42 @@ const services: {
   icon: LucideIcon;
   title: string;
   description: string;
+  url: string;
 }[] = [
   {
     icon: Sparkles,
     title: "AI Strategy & Implementation",
     description:
       "Custom AI systems engineered to integrate with your existing workflows. From GPT integrations to full ML pipelines—technology built for your specific context.",
+    url: "/services",
   },
   {
     icon: BarChart3,
     title: "Marketing Strategy",
     description:
       "Data-validated marketing architecture: every channel, every campaign backed by numbers and a rationale you can interrogate before spending a cent.",
+    url: "/services",
   },
   {
     icon: Target,
     title: "Intelligent Lead Generation",
     description:
       "Precision pipelines that don't just fill the top of the funnel—they qualify intent, filter noise, and deliver conversations worth having.",
+    url: "/services",
   },
   {
     icon: FileText,
     title: "Content & SEO Architecture",
     description:
       "Strategic content built to rank, convert, and compound. Not content for content's sake—content that sits inside a larger growth architecture.",
+    url: "/services/seo",
   },
   {
     icon: TrendingUp,
     title: "Paid Media & Performance",
     description:
       "Media buying as a science. Every dollar tracked, every creative tested, every audience mapped to a conversion hypothesis.",
+    url: "/services",
   },
 ];
 
@@ -86,8 +92,9 @@ const WhatWeBuildSection = () => {
         {/* Small screens: simple card grid, no lines or animation */}
         <div className="what-we-build-simple grid grid-cols-1 gap-4 sm:grid-cols-2 lg:hidden">
           {services.map((service) => (
-            <div
+            <Link
               key={service.title}
+              href={service.url}
               className="what-we-build-simple-card group cursor-pointer rounded-3xl bg-white p-6 shadow-lg transition-shadow hover:shadow-xl"
             >
               <div className="what-we-build-icon-wrap flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
@@ -99,7 +106,7 @@ const WhatWeBuildSection = () => {
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground line-clamp-4">
                 {service.description}
               </p>
-            </div>
+            </Link>
           ))}
         </div>
 
@@ -111,8 +118,9 @@ const WhatWeBuildSection = () => {
           />
           <div className="mt-0 flex w-full flex-nowrap items-stretch gap-0 overflow-visible pb-2">
             {services.map((service, i) => (
-              <div
+              <Link
                 key={service.title}
+                href={service.url}
                 className="what-we-build-card -ml-24 flex min-w-[300px] flex-1 cursor-pointer flex-col items-center first:ml-0 xl:-ml-28 xl:min-w-[320px]"
               >
                 <div
@@ -139,7 +147,7 @@ const WhatWeBuildSection = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
