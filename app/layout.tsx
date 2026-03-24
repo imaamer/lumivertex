@@ -27,7 +27,8 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <Header />
-        <main className="flex-1">{children}</main>
+        {/* Pages supply their own <main>; this wrapper only fills space so the footer stays at the bottom */}
+        <div className="flex min-h-0 w-full flex-1 flex-col">{children}</div>
         <Footer />
       </body>
     </html>

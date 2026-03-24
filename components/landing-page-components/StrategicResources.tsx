@@ -55,6 +55,7 @@ const StrategicResources = () => {
 
   return (
     <section
+      id="resources"
       ref={sectionRef}
       className={`strategic-resources-section py-16 md:py-20 bg-muted ${inView ? "strategic-resources-in-view" : ""}`}
     >

@@ -4,32 +4,9 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+import { featuredBlogPosts } from "@/data/blog-posts";
 
 const categories = ["General", "Marketing", "Design", "Development", "Testing"];
-
-const posts = [
-  {
-    category: "Artificial intelligence",
-    date: "21, Jun, 2023",
-    title: "5 Ways AI is Revolutionizing Everyday Businesses",
-    href: "#",
-    image: "/images/blog-1.jpg",
-  },
-  {
-    category: "Cybersecurity",
-    date: "15, Jul, 2023",
-    title: "The Rising Threats and How to Stay Ahead of the Curve",
-    href: "#",
-    image: "/images/blog-2.jpg",
-  },
-  {
-    category: "IT Company",
-    date: "29, May, 2023",
-    title: "5 Hacks for Managing Your IT Infrastructure",
-    href: "#",
-    image: "/images/blog-3.jpg",
-  },
-];
 
 const BlogSection = () => {
   const [activeCategory, setActiveCategory] = useState("General");
@@ -74,9 +51,9 @@ const BlogSection = () => {
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post) => (
+          {featuredBlogPosts.map((post) => (
             <article
-              key={post.title}
+              key={post.id}
               className="group overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg hover:border-primary/30"
             >
               <div className="relative aspect-16/10 w-full overflow-hidden rounded-t-xl">
@@ -91,7 +68,7 @@ const BlogSection = () => {
               <div className="p-5">
                 <div className="mb-2 flex flex-wrap items-center gap-2 text-sm">
                   <span className="rounded-full bg-muted px-3 py-1 text-xs font-medium text-foreground">
-                    {post.category}
+                    {post.displayCategory}
                   </span>
                   <span className="text-muted-foreground">{post.date}</span>
                 </div>

@@ -27,6 +27,11 @@ const aboutMenuItems: { title: string; href: string; description: string }[] = [
     href: "/about/our-team",
     description: "The minds behind the methodology.",
   },
+  {
+    title: "Careers",
+    href: "/about/careers",
+    description: "Remote-first roles where strategy meets intelligence.",
+  },
 ];
 
 const servicesMenuItems: { title: string; href: string; description: string }[] = [
@@ -169,7 +174,7 @@ export function Header() {
                 Services
               </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <ul className="grid w-[320px] gap-2 p-2">
+                <ul className="grid max-h-[380px] w-[320px] gap-2 overflow-y-auto p-2">
                   <li>
                     <NavigationMenuLink asChild>
                       <Link
@@ -199,6 +204,7 @@ export function Header() {
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
+
             <NavigationMenuItem>
               <NavigationMenuLink
                 asChild
@@ -207,11 +213,12 @@ export function Header() {
                   "hover:bg-[#EAEFE9]! hover:text-foreground!"
                 )}
               >
-                <Link href="/industries" className="text-sm font-medium text-foreground">
-                  Industries
+                <Link href="/partnership" className="text-sm font-medium text-foreground">
+                  Partnership
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
+
             <NavigationMenuItem>
               <NavigationMenuLink
                 asChild
@@ -220,11 +227,12 @@ export function Header() {
                   "hover:bg-[#EAEFE9]! hover:text-foreground!"
                 )}
               >
-                <Link href="/case-studies" className="text-sm font-medium text-foreground">
-                  Case Studies
+                <Link href="/how-we-work" className="text-sm font-medium text-foreground">
+                  How We Work
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
+
             <NavigationMenuItem>
               <NavigationMenuLink
                 asChild
@@ -240,20 +248,6 @@ export function Header() {
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-
-        {/* Desktop CTA */}
-        <div className="hidden md:block shrink-0">
-          <Button
-            variant="default"
-            size="default"
-            className="rounded-full gap-2 px-6 py-5 text-primary-foreground shadow-sm hover:bg-primary/90"
-            asChild
-          >
-            <Link href="/contact">
-              Get Started <ArrowRight className="h-4 w-4" aria-hidden />
-            </Link>
-          </Button>
-        </div>
 
         {/* Mobile menu button */}
         <button
@@ -314,6 +308,15 @@ export function Header() {
                     Our Team
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href="/about/careers"
+                    className="block rounded-lg px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Careers
+                  </Link>
+                </li>
               </ul>
             </li>
             <li>
@@ -324,7 +327,7 @@ export function Header() {
               >
                 Services
               </Link>
-              <ul className="mt-1 mb-2 space-y-1 pl-6">
+              <ul className="mt-1 mb-2 max-h-56 space-y-1 overflow-y-auto pl-6 pr-1">
                 {servicesMenuItems.map((item) => (
                   <li key={item.href}>
                     <Link
@@ -349,6 +352,24 @@ export function Header() {
             </li>
             <li>
               <Link
+                href="/partnership"
+                className="block rounded-lg px-4 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted hover:text-primary"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Partnership
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/how-we-work"
+                className="block rounded-lg px-4 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted hover:text-primary"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                How We Work
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/case-studies"
                 className="block rounded-lg px-4 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted hover:text-primary"
                 onClick={() => setMobileMenuOpen(false)}
@@ -366,18 +387,6 @@ export function Header() {
               </Link>
             </li>
           </ul>
-          <div className="mt-4 px-4">
-            <Button
-              variant="default"
-              size="default"
-              className="w-full rounded-full gap-2 py-5 text-primary-foreground shadow-sm hover:bg-primary/90"
-              asChild
-            >
-              <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
-                Get Started <ArrowRight className="h-4 w-4" aria-hidden />
-              </Link>
-            </Button>
-          </div>
         </nav>
       </div>
     </header>
