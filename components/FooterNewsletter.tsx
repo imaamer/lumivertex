@@ -29,7 +29,7 @@ export function FooterNewsletter() {
         name="email"
         required
         autoComplete="email"
-        placeholder="Your email"
+        placeholder="Enter your email"
         className="h-12 min-w-0 flex-1 rounded-full border border-border/80 bg-background/80 px-5 text-sm text-foreground shadow-sm outline-none ring-primary/20 placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/25"
       />
       <Button
@@ -44,7 +44,7 @@ export function FooterNewsletter() {
           </>
         ) : (
           <>
-            Subscribe
+            Subscribe Now
             <ArrowRight className="h-4 w-4" aria-hidden />
           </>
         )}

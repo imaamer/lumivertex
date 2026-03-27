@@ -15,8 +15,7 @@ import {
 import { FooterNewsletter } from "@/components/FooterNewsletter";
 import { googleMapsEmbedUrl, SITE_CONTACT } from "@/lib/site-contact";
 
-const labelClass =
-  "text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-primary";
+const labelClass = "text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-primary";
 
 const quickLinks: { label: string; href: string }[] = [
   { label: "Home", href: "/" },
@@ -37,17 +36,13 @@ const serviceLinks: { label: string; href: string }[] = [
   { label: "Social Media", href: "/services/social-media-marketing" },
   { label: "Content", href: "/services/content-marketing" },
   { label: "Web & UX", href: "/services/ui-ux" },
-  { label: "Email", href: "/services/email-marketing" },
-  { label: "Analytics", href: "/services/business-intelligence" },
-  { label: "Brand Strategy", href: "/services/branding" },
-  { label: "Reputation & PR", href: "/services/reputation" },
 ];
 
 const socialLinks: { label: string; href: string; Icon: LucideIcon }[] = [
   { label: "LinkedIn", href: "#", Icon: Linkedin },
-  { label: "Instagram", href: "#", Icon: Instagram },
-  { label: "Facebook", href: "#", Icon: Facebook },
-  { label: "Twitter", href: "#", Icon: Twitter },
+  { label: "Instagram", href: "https://www.instagram.com/lumivertex_bpo/", Icon: Instagram },
+  { label: "Facebook", href: "https://www.facebook.com/share/1C74xPLq5r/", Icon: Facebook },
+  { label: "Twitter", href: "https://x.com/LumivertexBPO", Icon: Twitter },
   { label: "YouTube", href: "#", Icon: Youtube },
 ];
 
@@ -117,57 +112,82 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Links + contact */}
-          <div className="flex flex-col gap-12 lg:col-span-7 lg:gap-14">
-            <div className="grid gap-10 sm:grid-cols-2 sm:gap-8 lg:gap-12">
-              <nav aria-label="Quick links" className="relative">
-                <div className="absolute -left-3 top-0 bottom-0 w-px bg-linear-to-b from-primary/0 via-primary/35 to-primary/0 sm:-left-4" />
-                <h2 className={`${labelClass} pl-5 sm:pl-6`}>Quick links</h2>
-                <ul className="mt-5 space-y-2.5 pl-5 sm:pl-6">
-                  {quickLinks.map(({ label, href }) => (
-                    <li key={href + label}>
-                      <Link
-                        href={href}
-                        className="group inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-primary"
-                      >
-                        <span className="border-b border-transparent pb-px transition-[border-color] group-hover:border-primary/40">
-                          {label}
-                        </span>
-                        <ArrowUpRight className="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100" aria-hidden />
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-
-              <nav aria-label="Services">
-                <h2 className={labelClass}>Services</h2>
-                <ul className="mt-5 columns-1 gap-x-6 gap-y-2 sm:columns-2 [&>li]:break-inside-avoid">
-                  {serviceLinks.map(({ label, href }) => (
-                    <li key={href} className="mb-2">
-                      <Link
-                        href={href}
-                        className="text-sm text-muted-foreground transition-colors hover:text-primary"
-                      >
+          {/* Quick + Services row 1; Subscribe row 2 (cols 1–2); Contact spans both rows (col 3) */}
+          <div className="grid min-w-0 gap-10 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-4 lg:col-span-7 lg:gap-x-8">
+            <nav
+              aria-label="Quick links"
+              className="relative min-w-0 sm:col-start-1 sm:row-start-1"
+            >
+              <div className="absolute -left-3 top-0 bottom-0 w-px bg-linear-to-b from-primary/0 via-primary/35 to-primary/0 sm:-left-4" />
+              <h2 className={`${labelClass} pl-5 sm:pl-6`}>Quick links</h2>
+              <ul className="mt-5 space-y-2.5 pl-5 sm:pl-6">
+                {quickLinks.map(({ label, href }) => (
+                  <li key={href + label}>
+                    <Link
+                      href={href}
+                      className="group inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-primary"
+                    >
+                      <span className="border-b border-transparent pb-px transition-[border-color] group-hover:border-primary/40">
                         {label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            </div>
+                      </span>
+                      <ArrowUpRight
+                        className="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100"
+                        aria-hidden
+                      />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
 
-            {/* Contact strip — map bleeds to viewport left; contact column unchanged */}
-            <div className="min-w-0">
+            <nav aria-label="Services" className="min-w-0 sm:col-start-2 sm:row-start-1">
+              <h2 className={labelClass}>Services</h2>
+              <ul className="mt-5 space-y-2 [&>li]:break-inside-avoid">
+                {serviceLinks.map(({ label, href }) => (
+                  <li key={href}>
+                    <Link
+                      href={href}
+                      className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                    >
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/services"
+                className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary transition-colors hover:text-primary/80"
+              >
+                Browse all
+                <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+              </Link>
+            </nav>
+
+            {/* Last column: studio & contact — spans row 1–2 so subscribe can sit tight under quick + services */}
+            <div className="min-w-0 sm:col-start-3 sm:row-span-2 sm:row-start-1">
               <h2 className={labelClass}>Studio &amp; contact</h2>
-              <div className="mt-5 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] lg:items-start lg:gap-8">
-                <div
-                  className="group relative min-w-0 overflow-hidden rounded-none rounded-r-2xl border border-border/60 border-l-0 bg-card/50 shadow-sm ring-1 ring-border/30
-                  -ml-4 w-[calc(100%+1rem)]
-                  sm:-ml-6 sm:w-[calc(100%+1.5rem)]
-                  lg:-ml-8 lg:w-[calc(100%+2rem)]"
+              <div className="mt-5 flex flex-col gap-4">
+                <a
+                  href={`tel:${SITE_CONTACT.phoneTel}`}
+                  className="group flex items-center gap-2.5 text-sm text-foreground transition-colors hover:text-primary"
                 >
-                  <div className="relative aspect-16/10 w-full min-h-[220px] sm:aspect-video sm:min-h-0">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <Phone className="h-4 w-4" aria-hidden />
+                  </span>
+                  <span className="font-medium">{SITE_CONTACT.phoneDisplay}</span>
+                </a>
+                <a
+                  href={`mailto:${SITE_CONTACT.email}`}
+                  className="group flex items-center gap-2.5 text-sm text-foreground transition-colors hover:text-primary"
+                >
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <Mail className="h-4 w-4" aria-hidden />
+                  </span>
+                  <span className="break-all font-medium">{SITE_CONTACT.email}</span>
+                </a>
+
+                <div className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card/50 shadow-sm ring-1 ring-border/30">
+                  <div className="relative aspect-4/3 w-full min-h-[140px]">
                     <iframe
                       title="LumiVertex location on Google Maps"
                       src={googleMapsEmbedUrl}
@@ -177,123 +197,64 @@ const Footer = () => {
                       allowFullScreen
                     />
                   </div>
-                  <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-background/20 to-transparent" />
                 </div>
 
-                <div className="flex min-w-0 flex-col gap-3">
-                  <a
-                    href={`tel:${SITE_CONTACT.phoneTel}`}
-                    className="group flex items-start gap-3 rounded-2xl border border-border/50 bg-muted/25 px-4 py-3.5 transition-[border-color,box-shadow] hover:border-primary/25 hover:shadow-md"
-                  >
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                      <Phone className="h-4 w-4" aria-hidden />
-                    </span>
-                    <div className="min-w-0">
-                      <p className="text-[11px] font-semibold uppercase tracking-wide text-foreground/70">
-                        Phone
-                      </p>
-                      <p className="text-sm font-medium text-foreground transition-colors group-hover:text-primary">
-                        {SITE_CONTACT.phoneDisplay}
-                      </p>
-                    </div>
-                  </a>
-
-                  <a
-                    href={`mailto:${SITE_CONTACT.email}`}
-                    className="group flex items-start gap-3 rounded-2xl border border-border/50 bg-muted/25 px-4 py-3.5 transition-[border-color,box-shadow] hover:border-primary/25 hover:shadow-md"
-                  >
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                      <Mail className="h-4 w-4" aria-hidden />
-                    </span>
-                    <div className="min-w-0">
-                      <p className="text-[11px] font-semibold uppercase tracking-wide text-foreground/70">
-                        Email
-                      </p>
-                      <p className="break-all text-sm font-medium text-foreground transition-colors group-hover:text-primary">
-                        {SITE_CONTACT.email}
-                      </p>
-                    </div>
-                  </a>
-
-                  <div className="flex items-start gap-3 rounded-2xl border border-border/50 bg-muted/25 px-4 py-3.5">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                      <MapPin className="h-4 w-4" aria-hidden />
-                    </span>
-                    <div>
-                      <p className="text-[11px] font-semibold uppercase tracking-wide text-foreground/70">
-                        Address
-                      </p>
-                      <address className="not-italic text-sm leading-relaxed text-muted-foreground">
-                        {SITE_CONTACT.addressLines.map((line) => (
-                          <span key={line} className="block">
-                            {line}
-                          </span>
-                        ))}
-                      </address>
-                    </div>
-                  </div>
+                <div className="flex items-start gap-2.5 rounded-2xl border border-border/50 bg-muted/25 px-3 py-3">
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />
+                  <address className="not-italic text-xs leading-relaxed text-muted-foreground">
+                    {SITE_CONTACT.addressLines.map((line) => (
+                      <span key={line} className="block">
+                        {line}
+                      </span>
+                    ))}
+                  </address>
                 </div>
               </div>
+            </div>
+
+            <div className="min-w-0 sm:col-span-2 sm:col-start-1 sm:row-start-2">
+              <FooterNewsletter />
             </div>
           </div>
         </div>
 
-        {/* Newsletter + legal — full-width band */}
-        <div className="relative mt-14 border-t border-border/50 pt-12 sm:mt-16 sm:pt-14">
+        {/* Legal — full-width band */}
+        <div className="relative mt-14 border-t border-border/50 pt-10 sm:mt-16 sm:pt-12">
           <div className="absolute left-1/2 top-0 h-px w-[min(720px,90%)] -translate-x-1/2 bg-linear-to-r from-transparent via-primary/25 to-transparent" />
 
-          <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end lg:gap-10">
-            <div className="relative overflow-hidden rounded-3xl border border-dashed border-primary/25 bg-linear-to-br from-muted/50 via-background to-primary/4 p-6 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.6)] sm:p-8">
-              <div
-                className="pointer-events-none absolute -right-16 top-1/2 h-40 w-40 -translate-y-1/2 rounded-full bg-accent/10 blur-3xl"
-                aria-hidden
-              />
-              <div className="relative max-w-xl">
-                <p className={labelClass}>Newsletter</p>
-                <p className="mt-3 text-lg font-medium leading-snug tracking-tight text-foreground sm:text-xl">
-                  Strategic insight, weekly.
-                  <span className="text-muted-foreground"> No noise.</span>
-                </p>
-                <div className="mt-6">
-                  <FooterNewsletter />
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-col justify-between gap-6 rounded-3xl border border-border/60 bg-card/40 px-6 py-7 sm:px-8">
-              <div>
-                <p className={labelClass}>Legal</p>
-                <nav
-                  aria-label="Legal links"
-                  className="mt-4 flex flex-col gap-2 text-sm sm:flex-row sm:flex-wrap sm:gap-x-1 sm:gap-y-2"
-                >
-                  <Link
-                    href="/privacy-policy"
-                    className="text-muted-foreground transition-colors hover:text-primary"
-                  >
-                    Privacy Policy
-                  </Link>
-                  <span className="hidden text-muted-foreground/40 sm:inline" aria-hidden>
-                    ·
-                  </span>
-                  <Link href="/terms" className="text-muted-foreground transition-colors hover:text-primary">
-                    Terms of Service
-                  </Link>
-                  <span className="hidden text-muted-foreground/40 sm:inline" aria-hidden>
-                    ·
-                  </span>
-                  <Link
-                    href="/sitemap.xml"
-                    className="text-muted-foreground transition-colors hover:text-primary"
-                  >
-                    Sitemap
-                  </Link>
-                </nav>
-              </div>
-              <p className="text-xs leading-relaxed text-muted-foreground">
-                © {new Date().getFullYear()} LumiVertex. All rights reserved.
-              </p>
-            </div>
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+            <nav
+              aria-label="Legal links"
+              className="flex flex-col gap-2 text-sm sm:flex-row sm:flex-wrap sm:gap-x-1 sm:gap-y-2"
+            >
+              <Link
+                href="/privacy-policy"
+                className="text-muted-foreground transition-colors hover:text-primary"
+              >
+                Privacy Policy
+              </Link>
+              <span className="hidden text-muted-foreground/40 sm:inline" aria-hidden>
+                ·
+              </span>
+              <Link
+                href="/terms"
+                className="text-muted-foreground transition-colors hover:text-primary"
+              >
+                Terms of Service
+              </Link>
+              <span className="hidden text-muted-foreground/40 sm:inline" aria-hidden>
+                ·
+              </span>
+              <Link
+                href="/sitemap.xml"
+                className="text-muted-foreground transition-colors hover:text-primary"
+              >
+                Sitemap
+              </Link>
+            </nav>
+            <p className="text-xs leading-relaxed text-muted-foreground sm:text-right">
+              © {new Date().getFullYear()} LumiVertex. All rights reserved.
+            </p>
           </div>
         </div>
       </div>
