@@ -60,7 +60,7 @@
   --primary-foreground: #f6f7eb;
   --secondary: #e8e9df;
   --secondary-foreground: #333333;
-  --muted: #e8e9df;
+  --muted: rgba(35, 124, 103, 0.05);
   --muted-foreground: #5c5c5c;
   --accent: #48e5c2;
   --accent-foreground: #333333;
@@ -476,6 +476,20 @@ section.features-section .features-section-card-wrapper:hover .features-section-
   transition-delay: 180ms;
 }
 
+/* Paradigm bottom cards - scroll-triggered entrance */
+.lumi-vertex-paradigm .paradigm-bottom-cards {
+  opacity: 0;
+  transform: translateY(1rem);
+  transition:
+    opacity 0.55s ease-out,
+    transform 0.55s ease-out;
+}
+.lumi-vertex-paradigm-in-view .paradigm-bottom-cards {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 240ms;
+}
+
 /* Paradigm CTA: same arrow + text reveal as hero, triggered when section is in view */
 .lumi-vertex-paradigm .paradigm-cta-arrow {
   transform: translateY(-50%) translateX(0);
@@ -705,22 +719,7 @@ section.industry-section.industry-section-in-view .industry-section-heading {
 
 /* What We Build - cloud styling + floating */
 .what-we-build-section {
-  background: #1a5b4d !important;
-}
-.what-we-build-section .what-we-build-header .text-primary {
-  color: #a7e0d9 !important;
-}
-.what-we-build-section .what-we-build-header .text-foreground,
-.what-we-build-section .what-we-build-intro {
-  color: #f6f7eb !important;
-}
-.what-we-build-section .what-we-build-cta a {
-  border-color: #a7e0d9;
-  color: #a7e0d9;
-}
-.what-we-build-section .what-we-build-cta a:hover {
-  background-color: #a7e0d9 !important;
-  color: #0f3d3d !important;
+  background: #ffffff !important;
 }
 .what-we-build-cloud-body {
   background: #fff;
@@ -808,4 +807,15 @@ section.industry-section.industry-section-in-view .industry-section-heading {
 .what-we-build-section .what-we-build-card:nth-child(6) .what-we-build-cloud-float {
   animation-duration: 7s;
   animation-delay: 0.6s;
+}
+
+/* What We Build services list scrollbar */
+.services-list-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.services-list-scroll::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }

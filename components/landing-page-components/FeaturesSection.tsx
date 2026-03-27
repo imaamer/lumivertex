@@ -47,11 +47,11 @@ const FeaturesSection = () => {
                 i === 0 ? "delay-300" : i === 1 ? "delay-400" : i === 2 ? "delay-500" : "delay-600"
               }`}
             >
-              <div className="features-section-card group flex h-full min-h-full flex-col rounded-2xl border border-border bg-card p-6 transition-[background-color,box-shadow] duration-300 hover:bg-[#48e5c2] hover:shadow-[0_20px_40px_-12px_rgba(35,124,103,0.15)]">
+              <div className="features-section-card group flex h-full min-h-full flex-col rounded-2xl border border-border bg-[#ffffff] p-6 transition-[background-color,box-shadow] duration-300 hover:bg-[#e0e6e5] hover:shadow-[0_20px_40px_-12px_rgba(35,124,103,0.15)]">
                 <div className="features-section-card-inner flex flex-1 flex-col gap-4">
                   <span className="features-section-icon-wrap">
                     <span className="features-section-icon-inner">
-                      <feature.icon className="h-10 w-10 shrink-0 text-primary transition-colors duration-300 group-hover:text-white" />
+                      <feature.icon className="h-10 w-10 shrink-0 text-primary transition-colors duration-300 group-hover:text-[#333333]" />
                     </span>
                   </span>
                   <div className="min-w-0 flex-1">
@@ -73,4 +73,3 @@ const FeaturesSection = () => {
 };
 
 export default FeaturesSection;
-

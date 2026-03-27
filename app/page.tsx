@@ -15,8 +15,8 @@ export default function Home() {
       <HeroSection />
       <FeaturesSection />
       <LumiVertexParadigm />
-      <IndustrySection />
       <MeasuredOutcomesSection />
+      <IndustrySection />
       <WhatWeBuildSection />
       <LumivertexProcessSection />
       <StrategicResources />

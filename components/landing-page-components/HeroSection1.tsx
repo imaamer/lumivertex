@@ -65,7 +65,7 @@ export default function HeroSection1() {
           {/* Left: first image only */}
           <div className="w-full md:w-[60%] animate-in fade-in slide-in-from-left-6 duration-700 delay-300 fill-mode-both">
             <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl md:h-104">
-              <div className="absolute inset-0 origin-center animate-[hero-image-zoom-in_20s_ease-in-out_infinite]">
+              <div className="absolute inset-0">
                 <Image
                   src="/images/hero-1.jpg"
                   alt="Team working"
@@ -80,7 +80,7 @@ export default function HeroSection1() {
           {/* Right: second image (smaller) then stats below */}
           <div className="flex w-full flex-col gap-7 items-center justify-center md:w-[40%] animate-in fade-in slide-in-from-right-6 duration-700 delay-400 fill-mode-both">
             <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl md:h-80">
-              <div className="absolute inset-0 origin-center animate-[hero-image-zoom-in_20s_ease-in-out_0.3s_infinite]">
+              <div className="absolute inset-0">
                 <Image
                   src="/images/hero-2.jpg"
                   alt="Collaboration"
