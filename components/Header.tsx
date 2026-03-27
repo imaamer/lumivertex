@@ -1,57 +1,393 @@
 "use client";
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Menu, X } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuTrigger,
+  NavigationMenuContent,
+  NavigationMenuLink,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
+import { cn } from "@/lib/utils";
 
-const navLinks = [
-  { label: "About", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "Projects", href: "/projects" },
+const aboutMenuItems: { title: string; href: string; description: string }[] = [
+  {
+    title: "Our Story",
+    href: "/about/our-story",
+    description: "The principles that shaped how we think.",
+  },
+  {
+    title: "Our Team",
+    href: "/about/our-team",
+    description: "The minds behind the methodology.",
+  },
+  {
+    title: "Careers",
+    href: "/about/careers",
+    description: "Remote-first roles where strategy meets intelligence.",
+  },
+];
+
+const servicesMenuItems: { title: string; href: string; description: string }[] = [
+  {
+    title: "SEO Services",
+    href: "/services/seo",
+    description: "Build relevance, authority, and search growth.",
+  },
+  {
+    title: "PPC / Paid Ads Services",
+    href: "/services/ppc",
+    description: "Engineer paid campaigns with measurable outcomes.",
+  },
+  {
+    title: "Social Media Marketing",
+    href: "/services/social-media-marketing",
+    description: "Build intelligent presence across platforms.",
+  },
+  {
+    title: "Content Marketing",
+    href: "/services/content-marketing",
+    description: "Strategy-driven content that builds authority and converts.",
+  },
+  {
+    title: "Web & UX Design",
+    href: "/services/ui-ux",
+    description: "Interfaces engineered for clarity, conversion, and experience.",
+  },
+  {
+    title: "Email Marketing & Automation",
+    href: "/services/email-marketing",
+    description: "Intelligent nurture systems and CRM-aligned automation.",
+  },
+  {
+    title: "AI & Custom Technology Development",
+    href: "/services/ai",
+    description: "Custom AI, intelligent automation, and systems built for your reality.",
+  },
+  {
+    title: "Analytics & Business Intelligence",
+    href: "/services/business-intelligence",
+    description: "Dashboards, attribution, and BI that turn data into decisions.",
+  },
+  {
+    title: "Brand Strategy & Identity",
+    href: "/services/branding",
+    description: "Positioning, visual identity, and messaging that define what you mean.",
+  },
+  {
+    title: "Reputation & PR Management",
+    href: "/services/reputation",
+    description: "Online reputation, digital PR, and reviews that protect trust.",
+  },
+  {
+    title: "Lead Generation",
+    href: "/services/lead-generation",
+    description: "Inbound, outbound, and ABM systems that deliver qualified pipeline.",
+  },
 ];
 
 export function Header() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-8 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 pt-10 pb-10 sm:px-6 lg:px-8">
         <Link
           href="/"
           className="flex shrink-0 items-center gap-3 bg-transparent [&_span]:bg-transparent!"
+          onClick={() => setMobileMenuOpen(false)}
         >
           <Image
             src="/lumivertex-logo.png"
             alt="Lumivertex — Converging Ideas into Possibilities"
             width={187}
             height={40}
-            className="h-10 w-auto max-h-10 object-contain object-left bg-transparent"
+            className="h-8 w-auto max-h-10 object-contain object-left bg-transparent sm:h-10"
             priority
             unoptimized
           />
         </Link>
-        <nav className="flex items-center gap-8" aria-label="Main">
-          {navLinks.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-sm font-medium text-foreground transition-colors hover:text-primary"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
 
-        <Button
-          variant="default"
-          size="default"
-          className="rounded-full gap-2 px-6 py-5 text-primary-foreground shadow-sm hover:bg-primary/90"
-          asChild
+        {/* Desktop nav - shadcn NavigationMenu */}
+        <NavigationMenu className="hidden md:flex">
+          <NavigationMenuList className="flex gap-1 lg:gap-2">
+            <NavigationMenuItem>
+              <NavigationMenuLink
+                asChild
+                className={cn(
+                  navigationMenuTriggerStyle(),
+                  "hover:bg-[#EAEFE9]! hover:text-foreground!"
+                )}
+              >
+                <Link href="/" className="text-sm font-medium text-foreground">
+                  Home
+                </Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+
+            {/* About dropdown */}
+            <NavigationMenuItem className="hidden md:block">
+              <NavigationMenuTrigger className="text-sm font-medium text-foreground hover:bg-[#EAEFE9]! hover:text-foreground! data-[state=open]:bg-[#EAEFE9]! data-[state=open]:text-foreground! data-[state=open]:hover:bg-[#EAEFE9]!">
+                About
+              </NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid w-[280px] gap-2 p-2">
+                  <li>
+                    <NavigationMenuLink asChild>
+                      <Link
+                        href="/about"
+                        className="block select-none rounded-lg p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                      >
+                        <div className="font-medium text-foreground">About LumiVertex</div>
+                        <div className="text-sm text-muted-foreground">
+                          Our philosophy and capabilities
+                        </div>
+                      </Link>
+                    </NavigationMenuLink>
+                  </li>
+                  {aboutMenuItems.map((item) => (
+                    <li key={item.href}>
+                      <NavigationMenuLink asChild>
+                        <Link
+                          href={item.href}
+                          className="block select-none rounded-lg p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div className="font-medium text-foreground">{item.title}</div>
+                          <div className="text-sm text-muted-foreground">{item.description}</div>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                  ))}
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+
+            {/* Services dropdown */}
+            <NavigationMenuItem className="hidden md:block">
+              <NavigationMenuTrigger className="text-sm font-medium text-foreground hover:bg-[#EAEFE9]! hover:text-foreground! data-[state=open]:bg-[#EAEFE9]! data-[state=open]:text-foreground! data-[state=open]:hover:bg-[#EAEFE9]!">
+                Services
+              </NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid max-h-[380px] w-[320px] gap-2 overflow-y-auto p-2">
+                  <li>
+                    <NavigationMenuLink asChild>
+                      <Link
+                        href="/services"
+                        className="block select-none rounded-lg p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                      >
+                        <div className="font-medium text-foreground">All Services</div>
+                        <div className="text-sm text-muted-foreground">
+                          Explore our full integrated services suite.
+                        </div>
+                      </Link>
+                    </NavigationMenuLink>
+                  </li>
+                  {servicesMenuItems.map((item) => (
+                    <li key={item.href}>
+                      <NavigationMenuLink asChild>
+                        <Link
+                          href={item.href}
+                          className="block select-none rounded-lg p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div className="font-medium text-foreground">{item.title}</div>
+                          <div className="text-sm text-muted-foreground">{item.description}</div>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                  ))}
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <NavigationMenuLink
+                asChild
+                className={cn(
+                  navigationMenuTriggerStyle(),
+                  "hover:bg-[#EAEFE9]! hover:text-foreground!"
+                )}
+              >
+                <Link href="/partnership" className="text-sm font-medium text-foreground">
+                  Partnership
+                </Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <NavigationMenuLink
+                asChild
+                className={cn(
+                  navigationMenuTriggerStyle(),
+                  "hover:bg-[#EAEFE9]! hover:text-foreground!"
+                )}
+              >
+                <Link href="/how-we-work" className="text-sm font-medium text-foreground">
+                  How We Work
+                </Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <NavigationMenuLink
+                asChild
+                className={cn(
+                  navigationMenuTriggerStyle(),
+                  "hover:bg-[#EAEFE9]! hover:text-foreground!"
+                )}
+              >
+                <Link href="/contact" className="text-sm font-medium text-foreground">
+                  Contact
+                </Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+
+        {/* Mobile menu button */}
+        <button
+          type="button"
+          onClick={() => setMobileMenuOpen((open) => !open)}
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-foreground hover:bg-muted md:hidden"
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-menu"
+          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
         >
-          <Link href="/contact">
-            Get Started <ArrowRight className="h-4 w-4" aria-hidden />
-          </Link>
-        </Button>
+          {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
+      </div>
+
+      {/* Mobile menu panel */}
+      <div
+        id="mobile-menu"
+        className={`overflow-hidden transition-[max-height,opacity] duration-200 ease-out md:hidden ${
+          mobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        }`}
+        aria-hidden={!mobileMenuOpen}
+      >
+        <nav className="border-t border-border/40 bg-background px-4 pb-6 pt-4" aria-label="Main">
+          <ul className="flex flex-col gap-1">
+            <li>
+              <Link
+                href="/"
+                className="block rounded-lg px-4 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted hover:text-primary"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/about"
+                className="block rounded-lg px-4 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted hover:text-primary"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                About
+              </Link>
+              <ul className="mt-1 mb-2 space-y-1 pl-6">
+                <li>
+                  <Link
+                    href="/about/our-story"
+                    className="block rounded-lg px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Our Story
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/about/our-team"
+                    className="block rounded-lg px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Our Team
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/about/careers"
+                    className="block rounded-lg px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Careers
+                  </Link>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <Link
+                href="/services"
+                className="block rounded-lg px-4 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted hover:text-primary"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Services
+              </Link>
+              <ul className="mt-1 mb-2 max-h-56 space-y-1 overflow-y-auto pl-6 pr-1">
+                {servicesMenuItems.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="block rounded-lg px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </li>
+            <li>
+              <Link
+                href="/industries"
+                className="block rounded-lg px-4 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted hover:text-primary"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Industries
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/partnership"
+                className="block rounded-lg px-4 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted hover:text-primary"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Partnership
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/how-we-work"
+                className="block rounded-lg px-4 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted hover:text-primary"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                How We Work
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/case-studies"
+                className="block rounded-lg px-4 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted hover:text-primary"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Case Studies
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/contact"
+                className="block rounded-lg px-4 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted hover:text-primary"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Contact
+              </Link>
+            </li>
+          </ul>
+        </nav>
       </div>
     </header>
   );

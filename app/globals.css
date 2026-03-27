@@ -50,7 +50,7 @@
 :root {
   --radius: 0.625rem;
   /* Designer palette: #f6f7eb cream, #333333 charcoal, #237c67 teal, #48e5c2 turquoise */
-  --background: #f6f7eb;
+  --background: #ffffff;
   --foreground: #333333;
   --card: #f6f7eb;
   --card-foreground: #333333;
@@ -60,7 +60,7 @@
   --primary-foreground: #f6f7eb;
   --secondary: #e8e9df;
   --secondary-foreground: #333333;
-  --muted: #e8e9df;
+  --muted: rgba(35, 124, 103, 0.05);
   --muted-foreground: #5c5c5c;
   --accent: #48e5c2;
   --accent-foreground: #333333;
@@ -125,4 +125,697 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Text selection - outside layer so it isn't overridden by Tailwind/shadcn */
+::selection {
+  background-color: #48e5c2 !important;
+  color: var(--foreground) !important;
+}
+::-moz-selection {
+  background-color: #48e5c2 !important;
+  color: var(--foreground) !important;
+}
+
+@keyframes logo-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-25%);
+  }
+}
+
+@keyframes hero-image-zoom-in {
+  0% {
+    transform: scale(1.05);
+  }
+  50% {
+    transform: scale(1.18);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes cta-arrow-move {
+  from {
+    transform: translateY(-50%) translateX(0);
+  }
+  to {
+    transform: translateY(-50%) translateX(232px);
+  }
+}
+
+@keyframes cta-arrow-move-sm {
+  from {
+    transform: translateY(-50%) translateX(0);
+  }
+  to {
+    transform: translateY(-50%) translateX(170px);
+  }
+}
+
+/* CTA arrow move tuned for wider pill widths (e.g. 420px) */
+@keyframes cta-arrow-move-wide {
+  from {
+    transform: translateY(-50%) translateX(0);
+  }
+  to {
+    transform: translateY(-50%) translateX(332px);
+  }
+}
+
+/* Content Marketing CTA (400px pill): stop slightly before right edge */
+@keyframes cta-arrow-move-content-wide {
+  from {
+    transform: translateY(-50%) translateX(0);
+  }
+  to {
+    transform: translateY(-50%) translateX(280px);
+  }
+}
+
+/* Reputation hero CTA (~390×66px): arrow sweeps left → right; 292px = 390 - 24 - 24 - 50 */
+@keyframes cta-arrow-reputation-hero {
+  from {
+    transform: translateY(-50%) translateX(0);
+  }
+  to {
+    transform: translateY(-50%) translateX(292px);
+  }
+}
+
+/* Partnership hero CTA: padding box 396px (w-[400px] − border-4) − 24 − 24 − 40(arrow) = 308 */
+@keyframes cta-arrow-partnership-hero {
+  from {
+    transform: translateY(-50%) translateX(0);
+  }
+  to {
+    transform: translateY(-50%) translateX(308px);
+  }
+}
+
+/* Wide CTA pill (~420px): explicit class so animation always applies (Tailwind arbitrary animate-[...] can omit custom @keyframes) */
+@layer utilities {
+  .cta-arrow-animate-wide {
+    animation: cta-arrow-move-content-wide 1.2s ease-out 0.4s forwards;
+  }
+  .cta-arrow-animate-reputation-hero {
+    animation: cta-arrow-reputation-hero 1.2s ease-out 0.4s forwards;
+  }
+  .cta-arrow-animate-partnership-hero {
+    animation: cta-arrow-partnership-hero 1.2s ease-out 0.4s forwards;
+  }
+
+  .our-story-hero-image-in {
+    animation: our-story-hero-image 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.06s both;
+  }
+
+  .our-story-hero-glow-in {
+    animation: our-story-hero-glow 1.15s cubic-bezier(0.22, 1, 0.36, 1) 0s both;
+  }
+
+  .our-story-hero-gradient-sheen {
+    background-size: 220% auto;
+    animation: our-story-hero-gradient-sheen 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
+  }
+
+  /* Our Team — accent bar draws down; editorial rail fades in */
+  .our-team-accent-bar-in {
+    transform-origin: top;
+    animation: our-team-accent-bar 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
+  }
+
+  .our-team-editorial-rail-in {
+    transform-origin: top;
+    animation: our-team-editorial-rail 1s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .our-story-hero-image-in,
+  .our-story-hero-glow-in {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .our-story-hero-gradient-sheen {
+    animation: none;
+    background-size: 100% auto;
+  }
+
+  .our-team-accent-bar-in {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .our-team-editorial-rail-in {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes cta-text-reveal {
+  from {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+
+/* About / Our Story hero — image settles in; glow blooms (respect reduced motion below) */
+@keyframes our-story-hero-image {
+  from {
+    opacity: 0;
+    transform: scale(1.08);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes our-story-hero-glow {
+  from {
+    opacity: 0;
+    transform: scale(0.88);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes our-story-hero-gradient-sheen {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes our-team-accent-bar {
+  from {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes our-team-editorial-rail {
+  from {
+    opacity: 0;
+    transform: scaleY(0.65);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+@keyframes seesaw-in {
+  0% {
+    transform: rotate(-6deg);
+    opacity: 0.5;
+  }
+  50% {
+    transform: rotate(5deg);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes float-on-water {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-8px) translateX(3px) rotate(0.4deg);
+  }
+  50% {
+    transform: translateY(-2px) translateX(-2px) rotate(-0.3deg);
+  }
+  75% {
+    transform: translateY(-6px) translateX(-1px) rotate(0.2deg);
+  }
+}
+
+@keyframes cloud-float {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+  33% {
+    transform: translateY(-14px) translateX(10px);
+  }
+  66% {
+    transform: translateY(-8px) translateX(-8px);
+  }
+}
+
+/* Lumivertex Process - each arrow moves left to right within its own section, then loops */
+@keyframes process-arrow-flow {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: 100%;
+  }
+}
+.process-arrow-in-slot {
+  animation: process-arrow-flow 2.5s linear infinite;
+  will-change: left;
+}
+.process-arrow-delay-0 {
+  animation-delay: 0s;
+}
+.process-arrow-delay-1 {
+  animation-delay: 0.85s;
+}
+.process-arrow-delay-2 {
+  animation-delay: 1.7s;
+}
+
+/* Feature section - whole card zooms; wrapper has entrance animation so Tailwind doesn't override */
+section.features-section .features-section-card-wrapper {
+  position: relative;
+  overflow: visible;
+}
+section.features-section .features-section-card {
+  position: relative;
+  overflow: hidden;
+  transform-origin: center;
+  transition: transform 1.5s ease-out;
+}
+section.features-section .features-section-card-wrapper:hover .features-section-card {
+  transform: scale(1.1);
+}
+section.features-section .features-section-card-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 100%;
+}
+section.features-section .features-section-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+}
+section.features-section .features-section-icon-inner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center;
+  transition: transform 0.5s ease-out !important;
+}
+section.features-section .features-section-card-wrapper:hover .features-section-icon-inner {
+  transform: rotate(10deg);
+}
+
+/* LumiVertex Paradigm - scroll-triggered entrance */
+.lumi-vertex-paradigm .paradigm-heading,
+.lumi-vertex-paradigm .paradigm-cta-wrapper,
+.lumi-vertex-paradigm .paradigm-image {
+  opacity: 0;
+  transform: translateY(1rem);
+  transition:
+    opacity 0.55s ease-out,
+    transform 0.55s ease-out;
+}
+.lumi-vertex-paradigm-in-view .paradigm-heading {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0ms;
+}
+.lumi-vertex-paradigm-in-view .paradigm-cta-wrapper {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 80ms;
+}
+.lumi-vertex-paradigm-in-view .paradigm-image {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 180ms;
+}
+
+/* Paradigm bottom cards - scroll-triggered entrance */
+.lumi-vertex-paradigm .paradigm-bottom-cards {
+  opacity: 0;
+  transform: translateY(1rem);
+  transition:
+    opacity 0.55s ease-out,
+    transform 0.55s ease-out;
+}
+.lumi-vertex-paradigm-in-view .paradigm-bottom-cards {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 240ms;
+}
+
+/* Paradigm CTA: same arrow + text reveal as hero, triggered when section is in view */
+.lumi-vertex-paradigm .paradigm-cta-arrow {
+  transform: translateY(-50%) translateX(0);
+}
+.lumi-vertex-paradigm .paradigm-cta-text {
+  clip-path: inset(0 100% 0 0);
+  opacity: 0;
+}
+.lumi-vertex-paradigm-in-view .paradigm-cta-arrow {
+  animation: cta-arrow-move 1.2s ease-out 0.4s forwards !important;
+}
+.lumi-vertex-paradigm-in-view .paradigm-cta-text {
+  animation: cta-text-reveal 1.2s ease-out 0.4s forwards !important;
+}
+
+/* Measured Outcomes - scroll-triggered entrance */
+.measured-outcomes-section .measured-outcomes-title,
+.measured-outcomes-section .measured-outcomes-card {
+  opacity: 0;
+  transform: translateY(1rem);
+  transition:
+    opacity 0.5s ease-out,
+    transform 0.5s ease-out;
+}
+.measured-outcomes-in-view .measured-outcomes-title {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0ms;
+}
+.measured-outcomes-in-view .measured-outcomes-card:nth-child(1) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 100ms;
+}
+.measured-outcomes-in-view .measured-outcomes-card:nth-child(2) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 200ms;
+}
+.measured-outcomes-in-view .measured-outcomes-card:nth-child(3) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 300ms;
+}
+
+/* Strategic Resources - scroll-triggered entrance */
+section.strategic-resources-section .strategic-resources-tag,
+section.strategic-resources-section .strategic-resources-title,
+section.strategic-resources-section .strategic-resources-desc,
+section.strategic-resources-section .strategic-resources-cta,
+section.strategic-resources-section .strategic-resources-card {
+  opacity: 0 !important;
+  transform: translateY(1rem);
+  transition:
+    opacity 0.5s ease-out,
+    transform 0.5s ease-out;
+}
+section.strategic-resources-section.strategic-resources-in-view .strategic-resources-tag {
+  opacity: 1 !important;
+  transform: translateY(0);
+  transition-delay: 0ms;
+}
+section.strategic-resources-section.strategic-resources-in-view .strategic-resources-title {
+  opacity: 1 !important;
+  transform: translateY(0);
+  transition-delay: 80ms;
+}
+section.strategic-resources-section.strategic-resources-in-view .strategic-resources-desc {
+  opacity: 1 !important;
+  transform: translateY(0);
+  transition-delay: 160ms;
+}
+section.strategic-resources-section.strategic-resources-in-view .strategic-resources-cta {
+  opacity: 1 !important;
+  transform: translateY(0);
+  transition-delay: 240ms;
+}
+section.strategic-resources-section.strategic-resources-in-view
+  .strategic-resources-card:nth-child(1) {
+  opacity: 1 !important;
+  transform: translateY(0);
+  transition-delay: 100ms;
+}
+section.strategic-resources-section.strategic-resources-in-view
+  .strategic-resources-card:nth-child(2) {
+  opacity: 1 !important;
+  transform: translateY(0);
+  transition-delay: 180ms;
+}
+section.strategic-resources-section.strategic-resources-in-view
+  .strategic-resources-card:nth-child(3) {
+  opacity: 1 !important;
+  transform: translateY(0);
+  transition-delay: 260ms;
+}
+section.strategic-resources-section.strategic-resources-in-view
+  .strategic-resources-card:nth-child(4) {
+  opacity: 1 !important;
+  transform: translateY(0);
+  transition-delay: 340ms;
+}
+
+/* Industry section - scroll-triggered heading */
+section.industry-section .industry-section-heading {
+  opacity: 0 !important;
+  transform: translateY(1rem);
+  transition:
+    opacity 0.55s ease-out,
+    transform 0.55s ease-out;
+}
+section.industry-section.industry-section-in-view .industry-section-heading {
+  opacity: 1 !important;
+  transform: translateY(0);
+}
+
+/* What We Build - scroll-triggered entrance + card hover */
+.what-we-build-section .what-we-build-header,
+.what-we-build-section .what-we-build-intro,
+.what-we-build-section .what-we-build-card,
+.what-we-build-section .what-we-build-simple-card,
+.what-we-build-section .what-we-build-cta {
+  opacity: 0;
+  transform: translateY(1rem);
+  transition:
+    opacity 0.5s ease-out,
+    transform 0.5s ease-out;
+}
+.what-we-build-in-view .what-we-build-header {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0ms;
+}
+.what-we-build-in-view .what-we-build-intro {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 80ms;
+}
+.what-we-build-in-view .what-we-build-card:nth-child(1) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 120ms;
+}
+.what-we-build-in-view .what-we-build-card:nth-child(2) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 180ms;
+}
+.what-we-build-in-view .what-we-build-card:nth-child(3) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 240ms;
+}
+.what-we-build-in-view .what-we-build-card:nth-child(4) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 300ms;
+}
+.what-we-build-in-view .what-we-build-card:nth-child(5) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 360ms;
+}
+.what-we-build-in-view .what-we-build-card:nth-child(6) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 420ms;
+}
+.what-we-build-in-view .what-we-build-simple-card:nth-child(1) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 100ms;
+}
+.what-we-build-in-view .what-we-build-simple-card:nth-child(2) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 150ms;
+}
+.what-we-build-in-view .what-we-build-simple-card:nth-child(3) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 200ms;
+}
+.what-we-build-in-view .what-we-build-simple-card:nth-child(4) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 250ms;
+}
+.what-we-build-in-view .what-we-build-simple-card:nth-child(5) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 300ms;
+}
+.what-we-build-in-view .what-we-build-simple-card:nth-child(6) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 350ms;
+}
+.what-we-build-in-view .what-we-build-cta {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 500ms;
+}
+/* What We Build - allow clouds to float outside without clipping (desktop) */
+.what-we-build-section,
+.what-we-build-section .container {
+  overflow: visible;
+}
+/* Only apply clouds layout at lg+ so Tailwind's hidden lg:block works on small screens */
+@media (min-width: 1024px) {
+  .what-we-build-clouds {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    overflow: visible;
+  }
+}
+.what-we-build-top-line {
+  flex-shrink: 0;
+  margin-bottom: 0;
+}
+.what-we-build-clouds .grid {
+  margin-top: 0;
+}
+.what-we-build-connector {
+  flex-shrink: 0;
+}
+
+/* What We Build - cloud styling + floating */
+.what-we-build-section {
+  background: #ffffff !important;
+}
+.what-we-build-cloud-body {
+  background: #fff;
+  border: none;
+  border-radius: 3rem;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.18),
+    0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #333;
+  position: relative;
+  z-index: 2;
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.35s ease-out;
+}
+.what-we-build-section .what-we-build-card:hover .what-we-build-cloud-body {
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.22),
+    0 6px 12px rgba(0, 0, 0, 0.12);
+  transform: scale(1.02);
+}
+.what-we-build-cloud-body:hover .what-we-build-icon-wrap {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+}
+.what-we-build-cloud-body:hover .what-we-build-icon-wrap svg {
+  color: var(--primary-foreground) !important;
+  stroke: var(--primary-foreground);
+}
+.what-we-build-cloud-body .text-foreground {
+  color: #333 !important;
+}
+.what-we-build-cloud-body .text-muted-foreground {
+  color: #5c5c5c !important;
+}
+.what-we-build-cloud-body .text-primary {
+  color: #237c67 !important;
+}
+.what-we-build-cloud-body .bg-primary\/10 {
+  background-color: rgba(35, 124, 103, 0.12);
+}
+
+/* What We Build - simple cards (small screens) */
+.what-we-build-simple-card .text-foreground {
+  color: #333 !important;
+}
+.what-we-build-simple-card .text-muted-foreground {
+  color: #5c5c5c !important;
+}
+.what-we-build-simple-card:hover .what-we-build-icon-wrap {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+}
+.what-we-build-simple-card:hover .what-we-build-icon-wrap svg {
+  color: var(--primary-foreground) !important;
+  stroke: var(--primary-foreground);
+}
+
+.what-we-build-cloud-float {
+  animation: cloud-float 8s ease-in-out infinite;
+}
+.what-we-build-section .what-we-build-card:hover .what-we-build-cloud-float {
+  animation-play-state: paused;
+}
+.what-we-build-section .what-we-build-card:nth-child(1) .what-we-build-cloud-float {
+  animation-duration: 9s;
+  animation-delay: 0s;
+}
+.what-we-build-section .what-we-build-card:nth-child(2) .what-we-build-cloud-float {
+  animation-duration: 7.5s;
+  animation-delay: 0.5s;
+}
+.what-we-build-section .what-we-build-card:nth-child(3) .what-we-build-cloud-float {
+  animation-duration: 10s;
+  animation-delay: 0.2s;
+}
+.what-we-build-section .what-we-build-card:nth-child(4) .what-we-build-cloud-float {
+  animation-duration: 8s;
+  animation-delay: 0.7s;
+}
+.what-we-build-section .what-we-build-card:nth-child(5) .what-we-build-cloud-float {
+  animation-duration: 9.5s;
+  animation-delay: 0.3s;
+}
+.what-we-build-section .what-we-build-card:nth-child(6) .what-we-build-cloud-float {
+  animation-duration: 7s;
+  animation-delay: 0.6s;
+}
+
+/* What We Build services list scrollbar */
+.services-list-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.services-list-scroll::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
