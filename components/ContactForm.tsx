@@ -192,10 +192,10 @@ export function ContactForm() {
         <p className="text-sm text-destructive" role="alert">
           Something went wrong. Please try again or email{" "}
           <a
-            href="mailto:hello@lumivertex.com"
+            href="mailto:contact@lumivertex.com"
             className="font-medium underline underline-offset-2"
           >
-            hello@lumivertex.com
+            contact@lumivertex.com
           </a>
           .
         </p>

@@ -59,7 +59,7 @@ const Footer = () => {
         aria-hidden
       />
 
-      <div className="container relative mx-auto w-full max-w-7xl px-4 pb-16 pt-16 sm:px-6 sm:pb-20 sm:pt-20 lg:px-8">
+      <div className="container relative mx-auto w-full max-w-8xl px-4 pb-16 pt-16 sm:px-6 sm:pb-20 sm:pt-20 lg:px-10">
         {/* Main grid: brand + content */}
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-10 xl:gap-14">
           {/* Brand — floating panel */}

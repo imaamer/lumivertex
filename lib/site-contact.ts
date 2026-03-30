@@ -2,7 +2,7 @@
 
 export const SITE_CONTACT = {
   brandTagline: "LumiVertex, Converging Ideas into Possibilities",
-  email: "hello@lumivertex.com",
+  email: "contact@lumivertex.com",
   phoneDisplay: "+44 7459 365167",
   phoneTel: "+447459365167",
   whatsappDisplay: "+44 7459 365167",
