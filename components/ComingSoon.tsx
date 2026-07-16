@@ -13,16 +13,16 @@ const ComingSoon = () => {
         unoptimized
       />
       <h1 className="mb-6 max-w-2xl text-center text-4xl font-bold tracking-tight text-foreground md:text-4xl">
-        Something Powerful Is Taking Shape
+        Coming Soon
       </h1>
-      <p className="mb-6 max-w-xl text-center text-lg leading-relaxed">
-        We&apos;re working behind the scenes on technology built to solve real problems and make
-        everyday work smarter and simpler. Thoughtfully designed. Carefully built. Almost ready.
+      <p className="mb-6 max-w-5xl text-center text-lg leading-relaxed">
+        We're currently putting the finishing touches on something exciting. Our AI-powered
+        automation company is launching soon, bringing intelligent solutions designed to help
+        businesses automate workflows, improve efficiency, and unlock new possibilities. Our website
+        is temporarily under maintenance while we prepare for launch. Thank you for your patience,
+        we can't wait to share what's coming.
       </p>
-      <h2 className="text-3xl font-bold text-foreground mb-6">Coming Soon</h2>
-      <p className="text-center">
-        Stay with us, we can&apos;t wait to show you what&apos;s coming.
-      </p>
+      <h2 className="text-3xl font-bold text-foreground mb-6">See you soon!</h2>
     </div>
   );
 };

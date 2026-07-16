@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Header } from "@/components/Header";
 import Footer from "@/components/Footer";
+import ComingSoon from "@/components/ComingSoon";
 import "./globals.css";
 
 const inter = Inter({
@@ -26,10 +27,11 @@ export default function RootLayout({
         className={`${inter.variable} font-sans flex min-h-screen flex-col antialiased`}
         suppressHydrationWarning
       >
-        <Header />
+        {/* <Header /> */}
         {/* Pages supply their own <main>; this wrapper only fills space so the footer stays at the bottom */}
-        <div className="flex min-h-0 w-full flex-1 flex-col">{children}</div>
-        <Footer />
+        {/* <div className="flex min-h-0 w-full flex-1 flex-col">{children}</div> */}
+        {/* <Footer /> */}
+        <ComingSoon />
       </body>
     </html>
   );
